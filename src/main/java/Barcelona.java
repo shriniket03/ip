@@ -58,9 +58,47 @@ public class Barcelona {
                 } else {
                     System.out.println(LINE + "\n bad input \n" + LINE);
                 }
+            } else if (input.split(" ")[0].equals("todo")) {
+                String[] params = input.split(" ");
+                if (params.length > 1) {
+                    Todos todo = new Todos(params[1]);
+                    arr[elems++] = todo;
+                    System.out.println(LINE + "\n Got it. I've added this task: \n" + todo + "\n" +
+                            "Now you have " + elems + " tasks in the list\n" + LINE);
+                } else {
+                    System.out.println(LINE + "\n bad input \n" + LINE);
+                }
+            } else if (input.split(" ")[0].equals("deadline")) {
+                String[] params = input.split(" ", 2);
+                System.out.println(params[1]);
+                if (params.length > 1 && params[1].contains("/by ")) {
+                    String[] subParam = params[1].split("/by ");
+                    String dueDate = subParam[1];
+                    Deadlines deadline = new Deadlines(dueDate, subParam[0]);
+                    arr[elems++] = deadline;
+                    System.out.println(LINE + "\n Got it. I've added this task: \n" + deadline + "\n" +
+                            "Now you have " + elems + " tasks in the list\n" + LINE);
+                } else {
+                    System.out.println(LINE + "\n bad input \n" + LINE);
+                }
+            } else if (input.split(" ")[0].equals("event")) {
+                String[] params = input.split(" ", 2);
+                if (params.length > 1 && params[1].contains("/from ") && params[1].contains("/to ")) {
+                    String[] split = params[1].split("/from ");
+                    String description = split[0];
+                    String[] subParam = split[1].split("/to ");
+                    String start = subParam[0];
+                    String end = subParam[1];
+
+                    Events event = new Events(description, start, end);
+                    arr[elems++] = event;
+                    System.out.println(LINE + "\n Got it. I've added this task: \n" + event + "\n" +
+                            "Now you have " + elems + " tasks in the list\n" + LINE);
+                } else {
+                    System.out.println(LINE + "\n bad input \n" + LINE);
+                }
             } else {
-                arr[elems++] = new Task(input);
-                System.out.println(LINE + "\n added: " + input + "\n" + LINE);
+                System.out.println(LINE + "\n bad input \n" + LINE);
             }
         }
         System.out.println(exit);
