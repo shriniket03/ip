@@ -1,10 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Barcelona {
     public static void main(String[] args) {
         String LINE = "____________________________________________________________";
-        Task[] arr = new Task[100];
-        int elems = 0;
+        ArrayList<Task> arr = new ArrayList<>();
 
         String greet = LINE + """
                 \nHello! I'm Barcelona
@@ -23,8 +23,8 @@ public class Barcelona {
                 break;
             } else if (input.equals("list")) {
                 StringBuilder list = new StringBuilder();
-                for (int j = 1; j <= elems; j++) {
-                    list.append(j).append(". ").append(arr[j - 1]).append("\n");
+                for (int j = 1; j <= arr.size(); j++) {
+                    list.append(j).append(". ").append(arr.get(j - 1)).append("\n");
                 }
                 System.out.println(LINE + "\n" + list + LINE);
             } else if (input.split(" ")[0].equals("mark")) {
@@ -32,11 +32,11 @@ public class Barcelona {
                 if (params.length > 1) {
                     try {
                         int taskId = Integer.parseInt(params[1]);
-                        arr[taskId - 1].markAsDone();
-                        System.out.println(LINE + "\n Nice! I've marked this task as done: \n" + arr[taskId - 1] + "\n" + LINE);
+                        arr.get(taskId - 1).markAsDone();
+                        System.out.println(LINE + "\n Nice! I've marked this task as done: \n" + arr.get(taskId - 1) + "\n" + LINE);
                     } catch (NumberFormatException e) {
                         System.out.println(LINE + "\n OOPS!!! The entered task index is not a number. \n" + LINE);
-                    } catch (NullPointerException | ArrayIndexOutOfBoundsException err) {
+                    } catch (NullPointerException | IndexOutOfBoundsException err) {
                         System.out.println(LINE + "\n OOPS!!! Task does not exist \n" + LINE);
                     }
                 } else {
@@ -47,12 +47,12 @@ public class Barcelona {
                 if (params.length > 1) {
                     try {
                         int taskId = Integer.parseInt(params[1]);
-                        arr[taskId - 1].markAsUndone();
-                        System.out.println(LINE + "\n OK, I've marked this task as not done yet: \n" + arr[taskId - 1]
+                        arr.get(taskId - 1).markAsUndone();
+                        System.out.println(LINE + "\n OK, I've marked this task as not done yet: \n" + arr.get(taskId - 1)
                                 + "\n" + LINE);
                     } catch (NumberFormatException e) {
                         System.out.println(LINE + "\n OOPS!!! The entered task index is not a number. \n" + LINE);
-                    } catch (NullPointerException | ArrayIndexOutOfBoundsException err) {
+                    } catch (NullPointerException | IndexOutOfBoundsException err) {
                         System.out.println(LINE + "\n OOPS!!! Task does not exist \n" + LINE);
                     }
                 } else {
@@ -62,9 +62,9 @@ public class Barcelona {
                 String[] params = input.split(" ");
                 if (params.length > 1) {
                     Todos todo = new Todos(params[1]);
-                    arr[elems++] = todo;
+                    arr.add(todo);
                     System.out.println(LINE + "\n Got it. I've added this task:\n" + todo + "\n" +
-                            "Now you have " + elems + " tasks in the list\n" + LINE);
+                            "Now you have " + arr.size() + " tasks in the list\n" + LINE);
                 } else {
                     System.out.println(LINE + "\n OOPS!!! The description of a todo cannot be empty. \n" + LINE);
                 }
@@ -74,9 +74,9 @@ public class Barcelona {
                     String[] subParam = params[1].split("/by ");
                     String dueDate = subParam[1];
                     Deadlines deadline = new Deadlines(dueDate, subParam[0]);
-                    arr[elems++] = deadline;
+                    arr.add(deadline);
                     System.out.println(LINE + "\n Got it. I've added this task:\n" + deadline + "\n" +
-                            "Now you have " + elems + " tasks in the list\n" + LINE);
+                            "Now you have " + arr.size() + " tasks in the list\n" + LINE);
                 } else {
                     System.out.println(LINE + "\n OOPS!!! The description/due date of a deadline cannot be empty. \n" + LINE);
                 }
@@ -90,11 +90,28 @@ public class Barcelona {
                     String end = subParam[1];
 
                     Events event = new Events(description, start, end);
-                    arr[elems++] = event;
+                    arr.add(event);
                     System.out.println(LINE + "\n Got it. I've added this task:\n" + event + "\n" +
-                            "Now you have " + elems + " tasks in the list\n" + LINE);
+                            "Now you have " + arr.size() + " tasks in the list\n" + LINE);
                 } else {
                     System.out.println(LINE + "\n OOPS!!! The description/start date/end date of an event cannot be empty. \n" + LINE);
+                }
+            } else if (input.split(" ")[0].equals("delete")) {
+                String[] params = input.split(" ");
+                if (params.length > 1) {
+                    try {
+                        int taskId = Integer.parseInt(params[1]);
+                        Task toRemove = arr.get(taskId - 1);
+                        arr.remove(toRemove);
+                        System.out.println(LINE + "\n Noted. I've removed this task: \n" + toRemove
+                                + "\n" + "Now you have " + arr.size() + " tasks in the list\n" + LINE);
+                    } catch (NumberFormatException e) {
+                        System.out.println(LINE + "\n OOPS!!! The entered task index is not a number. \n" + LINE);
+                    } catch (NullPointerException | IndexOutOfBoundsException err) {
+                        System.out.println(LINE + "\n OOPS!!! Task does not exist \n" + LINE);
+                    }
+                } else {
+                    System.out.println(LINE + "\n OOPS!!! The task index cannot be empty. \n" + LINE);
                 }
             } else {
                 System.out.println(LINE + "\n OOPS!!! I'm sorry, but I don't know what that means :-( \n" + LINE);
