@@ -1,10 +1,48 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Barcelona {
     public static void main(String[] args) {
         String LINE = "____________________________________________________________";
+        // Load existing file
         ArrayList<Task> arr = new ArrayList<>();
+        File file = new File("./data/duke.txt");
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdir();
+        }
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            BufferedReader br = new BufferedReader(new FileReader("./data/duke.txt"));
+            int lineNum = 1;
+            for (String line; (line = br.readLine()) != null; lineNum++) {
+                String[] params = line.split(" \\| ");
+                try {
+                    Task toAdd;
+                    if (params[0].equals("T") && params.length==3) {
+                        toAdd = new Todos(params[2]);
+                    } else if (params[0].equals("D") && params.length == 4) {
+                        toAdd = new Deadlines(params[3], params[2]);
+                    } else if (params[0].equals("E") && params.length == 5) {
+                        toAdd = new Events(params[2], params[3], params[4]);
+                    } else {
+                        throw new FileCorruptedException("File is corrupted");
+                    }
+                    if (params[1].equals("1")) {
+                        toAdd.markAsDone();
+                    }
+                    arr.add(toAdd);
+                    System.out.println("INFO[" + lineNum + "] is successfully loaded");
+                } catch (FileCorruptedException e) {
+                    System.out.println("INFO[" + lineNum + "] is corrupted");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("file import error occurred");
+        }
 
         enum Command {
             BYE,
@@ -140,6 +178,17 @@ public class Barcelona {
                         System.out.println(LINE + "\n OOPS!!! The task index cannot be empty. \n" + LINE);
                     }
                     break;
+            }
+            // Update txt file
+            try(BufferedWriter bw = new BufferedWriter(new FileWriter("./data/duke.txt"))) {
+                for (int i=0; i<arr.size(); i++) {
+                    bw.write(arr.get(i).export());
+                    if (i != arr.size() - 1) {
+                        bw.newLine();
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("error writing to file");
             }
         }
         System.out.println(exit);
