@@ -1,7 +1,8 @@
 T | 1 | read book
-D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th | 2-4pm
 T | 1 | join sports club
-E | 0 | djdjdj  | lol  | bye
 T | 0 | go
-D | 0 | djjdjd  | jfjfjf
+D | 0 | hello  | 2/12/2019 1800
+D | 0 | djdjjdsj  | 2/12/2019 1800
+E | 0 | fjkdasjk  | 2/12/2019 1800 | 2/12/2019 1200
+E | 0 | fjkdasjk  | 2/12/2019 1800 | 2/12/2019 1200
+E | 0 | fjkdasjk  | 2/12/2019 1800 | 2/12/2019 2000

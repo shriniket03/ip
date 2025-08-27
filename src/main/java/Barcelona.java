@@ -1,4 +1,7 @@
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -6,6 +9,8 @@ import java.util.Scanner;
 public class Barcelona {
     public static void main(String[] args) {
         String LINE = "____________________________________________________________";
+        // default date time format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         // Load existing file
         ArrayList<Task> arr = new ArrayList<>();
         File file = new File("./data/duke.txt");
@@ -25,9 +30,10 @@ public class Barcelona {
                     if (params[0].equals("T") && params.length==3) {
                         toAdd = new Todos(params[2]);
                     } else if (params[0].equals("D") && params.length == 4) {
-                        toAdd = new Deadlines(params[3], params[2]);
+                        toAdd = new Deadlines(LocalDateTime.parse(params[3], formatter), params[2]);
                     } else if (params[0].equals("E") && params.length == 5) {
-                        toAdd = new Events(params[2], params[3], params[4]);
+                        toAdd = new Events(params[2], LocalDateTime.parse(params[3], formatter),
+                                LocalDateTime.parse(params[4], formatter));
                     } else {
                         throw new FileCorruptedException("File is corrupted");
                     }
@@ -36,7 +42,7 @@ public class Barcelona {
                     }
                     arr.add(toAdd);
                     System.out.println("INFO[" + lineNum + "] is successfully loaded");
-                } catch (FileCorruptedException e) {
+                } catch (FileCorruptedException | DateTimeParseException e) {
                     System.out.println("INFO[" + lineNum + "] is corrupted");
                 }
             }
@@ -134,11 +140,15 @@ public class Barcelona {
                     params = input.split(" ", 2);
                     if (params.length > 1 && params[1].contains("/by ")) {
                         String[] subParam = params[1].split("/by ");
-                        String dueDate = subParam[1];
-                        Deadlines deadline = new Deadlines(dueDate, subParam[0]);
-                        arr.add(deadline);
-                        System.out.println(LINE + "\n Got it. I've added this task:\n" + deadline + "\n" +
-                                "Now you have " + arr.size() + " tasks in the list\n" + LINE);
+                        try {
+                            LocalDateTime dueDate = LocalDateTime.parse(subParam[1], formatter);
+                            Deadlines deadline = new Deadlines(dueDate, subParam[0]);
+                            arr.add(deadline);
+                            System.out.println(LINE + "\n Got it. I've added this task:\n" + deadline + "\n" +
+                                    "Now you have " + arr.size() + " tasks in the list\n" + LINE);
+                            } catch (DateTimeParseException e) {
+                                System.out.println("Invalid date/time provided");
+                            }
                     } else {
                         System.out.println(LINE + "\n OOPS!!! The description/due date of a deadline cannot be empty. \n" + LINE);
                     }
@@ -148,14 +158,18 @@ public class Barcelona {
                     if (params.length > 1 && params[1].contains("/from ") && params[1].contains("/to ")) {
                         String[] split = params[1].split("/from ");
                         String description = split[0];
-                        String[] subParam = split[1].split("/to ");
-                        String start = subParam[0];
-                        String end = subParam[1];
+                        String[] subParam = split[1].split(" /to ");
+                        try {
+                            LocalDateTime start = LocalDateTime.parse(subParam[0], formatter);
+                            LocalDateTime end = LocalDateTime.parse(subParam[1], formatter);
 
-                        Events event = new Events(description, start, end);
-                        arr.add(event);
-                        System.out.println(LINE + "\n Got it. I've added this task:\n" + event + "\n" +
-                                "Now you have " + arr.size() + " tasks in the list\n" + LINE);
+                            Events event = new Events(description, start, end);
+                            arr.add(event);
+                            System.out.println(LINE + "\n Got it. I've added this task:\n" + event + "\n" +
+                                    "Now you have " + arr.size() + " tasks in the list\n" + LINE);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Invalid date/time provided");
+                        }
                     } else {
                         System.out.println(LINE + "\n OOPS!!! The description/start date/end date of an event cannot be empty. \n" + LINE);
                     }
