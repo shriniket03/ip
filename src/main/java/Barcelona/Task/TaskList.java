@@ -3,18 +3,18 @@ package Barcelona.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasklist;
+    private ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> arr) {
-        this.tasklist = arr;
+        this.taskList = arr;
     }
 
     public TaskList() {
-        this.tasklist = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
     public ArrayList<Task> getList() {
-        return this.tasklist;
+        return this.taskList;
     }
 
     /**
@@ -23,8 +23,8 @@ public class TaskList {
      */
     public String list() {
         StringBuilder list = new StringBuilder();
-        for (int j = 1; j <= tasklist.size(); j++) {
-            list.append(j).append(". ").append(tasklist.get(j - 1)).append("\n");
+        for (int j = 1; j <= taskList.size(); j++) {
+            list.append(j).append(". ").append(taskList.get(j - 1)).append("\n");
         }
         return list.toString();
     }
@@ -34,7 +34,7 @@ public class TaskList {
      * @param index - Index of task in tasklist
      */
     public void markDone(int index) {
-        this.tasklist.get(index).markAsDone();
+        this.taskList.get(index).markAsDone();
     }
 
     /**
@@ -42,11 +42,11 @@ public class TaskList {
      * @param index - Index of task in tasklist
      */
     public void markUndone(int index) {
-        this.tasklist.get(index).markAsUndone();
+        this.taskList.get(index).markAsUndone();
     }
 
     public Task getTask(int index) {
-        return this.tasklist.get(index);
+        return this.taskList.get(index);
     }
 
     /**
@@ -55,8 +55,8 @@ public class TaskList {
      * @return Size of new Tasklist
      */
     public int add(Task task) {
-        this.tasklist.add(task);
-        return tasklist.size();
+        this.taskList.add(task);
+        return taskList.size();
     }
 
     /**
@@ -65,7 +65,7 @@ public class TaskList {
      * @return Size of new Tasklist
      */
     public int remove(Task toRemove) {
-        this.tasklist.remove(toRemove);
-        return this.tasklist.size();
+        this.taskList.remove(toRemove);
+        return this.taskList.size();
     }
 }
