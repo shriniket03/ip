@@ -32,6 +32,7 @@ application {
 }
 
 shadowJar {
+    archiveFileName = 'barcelona.jar'
     archiveBaseName = "Barcelona"
     archiveClassifier = null
 }
