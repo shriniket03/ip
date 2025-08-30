@@ -1,4 +1,4 @@
-package Task;
+package Barcelona.Task;
 
 import java.util.ArrayList;
 

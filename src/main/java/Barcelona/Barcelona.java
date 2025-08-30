@@ -1,8 +1,10 @@
-import Parser.Parser;
-import Storage.Storage;
-import Ui.Ui;
-import Task.TaskList;
-import Exception.FileCorruptedException;
+package Barcelona;
+
+import Barcelona.Exception.FileCorruptedException;
+import Barcelona.Parser.Parser;
+import Barcelona.Storage.Storage;
+import Barcelona.Ui.Ui;
+import Barcelona.Task.TaskList;
 
 import java.util.Scanner;
 

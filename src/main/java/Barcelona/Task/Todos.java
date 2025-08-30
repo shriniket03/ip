@@ -1,4 +1,4 @@
-package Task;
+package Barcelona.Task;
 
 public class Todos extends Task {
 

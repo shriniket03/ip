@@ -1,4 +1,4 @@
-package Ui;
+package Barcelona.Ui;
 
 public class Ui {
     String LINE = "____________________________________________________________";

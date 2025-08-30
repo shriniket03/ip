@@ -1,8 +1,9 @@
-package Parser;
+package Barcelona.Parser;
 
-import Task.*;
-import Ui.Ui;
-import Storage.Storage;
+import Barcelona.Task.*;
+import Barcelona.Task.*;
+import Barcelona.Ui.Ui;
+import Barcelona.Storage.Storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -57,7 +58,7 @@ public class Parser {
                         } catch (NumberFormatException e) {
                             ui.log("OOPS!!! The entered task index is not a number.");
                         } catch (NullPointerException | IndexOutOfBoundsException err) {
-                            ui.log("OOPS!!! Task.Task does not exist");
+                            ui.log("OOPS!!! Barcelona.Exception.Barcelona.Exception.Task.Barcelona.Exception.Barcelona.Exception.Task does not exist");
                         }
                     } else {
                         ui.log("OOPS!!! The task index cannot be empty.");
@@ -74,7 +75,7 @@ public class Parser {
                         } catch (NumberFormatException e) {
                             ui.log("OOPS!!! The entered task index is not a number.");
                         } catch (NullPointerException | IndexOutOfBoundsException err) {
-                            ui.log("OOPS!!! Task.Task does not exist");
+                            ui.log("OOPS!!! Barcelona.Exception.Barcelona.Exception.Task.Barcelona.Exception.Barcelona.Exception.Task does not exist");
                         }
                     } else {
                         ui.log("OOPS!!! The task index cannot be empty.");
@@ -141,7 +142,7 @@ public class Parser {
                         } catch (NumberFormatException e) {
                             ui.log("OOPS!!! The entered task index is not a number.");
                         } catch (NullPointerException | IndexOutOfBoundsException err) {
-                            ui.log("OOPS!!! Task.Task does not exist");
+                            ui.log("OOPS!!! Barcelona.Exception.Barcelona.Exception.Task.Barcelona.Exception.Barcelona.Exception.Task does not exist");
                         }
                     } else {
                         ui.log("OOPS!!! The task index cannot be empty.");

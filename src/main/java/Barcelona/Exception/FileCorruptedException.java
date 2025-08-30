@@ -1,4 +1,4 @@
-package Exception;
+package Barcelona.Exception;
 
 public class FileCorruptedException extends Exception {
     public FileCorruptedException(String message) {
