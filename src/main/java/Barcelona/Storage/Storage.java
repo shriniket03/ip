@@ -57,6 +57,8 @@ public class Storage {
                     ui.log("INFO[" + lineNum + "] is successfully loaded");
                 } catch (DateTimeParseException e) {
                     throw new FileCorruptedException("INFO[" + lineNum + "] is corrupted");
+                } catch (FileCorruptedException e) {
+                    ui.log("INFO[" + lineNum + "] is corrupted");
                 }
             }
         } catch (IOException e) {
