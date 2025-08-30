@@ -1,3 +1,9 @@
+package Storage;
+
+import Task.*;
+import Ui.Ui;
+import Exception.FileCorruptedException;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +19,7 @@ public class Storage {
         this.ui = ui;
     }
 
-    public ArrayList<Task> load() throws FileCorruptedException{
+    public ArrayList<Task> load() throws FileCorruptedException {
         ArrayList<Task> taskList = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         File file = new File(filePath);

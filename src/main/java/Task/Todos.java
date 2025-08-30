@@ -1,4 +1,6 @@
-public class Todos extends Task{
+package Task;
+
+public class Todos extends Task {
 
     public Todos(String description) {
         super(description);

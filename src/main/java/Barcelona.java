@@ -1,3 +1,9 @@
+import Parser.Parser;
+import Storage.Storage;
+import Ui.Ui;
+import Task.TaskList;
+import Exception.FileCorruptedException;
+
 import java.util.Scanner;
 
 public class Barcelona {
@@ -23,8 +29,7 @@ public class Barcelona {
     public void run() {
         ui.greet();
         Parser parser = new Parser(ui);
-        parser.listen(new Scanner(System.in), this.tasks);
-        storage.write(this.tasks.tasklist);
+        parser.listen(new Scanner(System.in), this.tasks, storage);
         ui.exit();
     }
 }

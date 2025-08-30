@@ -1,3 +1,8 @@
+package Parser;
+
+import Task.*;
+import Ui.Ui;
+import Storage.Storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,7 +26,7 @@ public class Parser {
         this.ui = ui;
     }
 
-    public void listen(Scanner sc, TaskList tasklist) {
+    public void listen(Scanner sc, TaskList tasklist, Storage storage) {
         // default date time format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         outer:
@@ -52,7 +57,7 @@ public class Parser {
                         } catch (NumberFormatException e) {
                             ui.log("OOPS!!! The entered task index is not a number.");
                         } catch (NullPointerException | IndexOutOfBoundsException err) {
-                            ui.log("OOPS!!! Task does not exist");
+                            ui.log("OOPS!!! Task.Task does not exist");
                         }
                     } else {
                         ui.log("OOPS!!! The task index cannot be empty.");
@@ -69,7 +74,7 @@ public class Parser {
                         } catch (NumberFormatException e) {
                             ui.log("OOPS!!! The entered task index is not a number.");
                         } catch (NullPointerException | IndexOutOfBoundsException err) {
-                            ui.log("OOPS!!! Task does not exist");
+                            ui.log("OOPS!!! Task.Task does not exist");
                         }
                     } else {
                         ui.log("OOPS!!! The task index cannot be empty.");
@@ -136,13 +141,14 @@ public class Parser {
                         } catch (NumberFormatException e) {
                             ui.log("OOPS!!! The entered task index is not a number.");
                         } catch (NullPointerException | IndexOutOfBoundsException err) {
-                            ui.log("OOPS!!! Task does not exist");
+                            ui.log("OOPS!!! Task.Task does not exist");
                         }
                     } else {
                         ui.log("OOPS!!! The task index cannot be empty.");
                     }
                     break;
             }
+            storage.write(tasklist.getList());
         }
     }
 }

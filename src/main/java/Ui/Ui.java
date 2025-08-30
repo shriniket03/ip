@@ -1,3 +1,5 @@
+package Ui;
+
 public class Ui {
     String LINE = "____________________________________________________________";
     public void greet() {
