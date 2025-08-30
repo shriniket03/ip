@@ -18,7 +18,8 @@ public class Parser {
         TODO,
         DEADLINE,
         EVENT,
-        DELETE
+        DELETE,
+        FIND
     }
 
     public Ui ui;
@@ -155,6 +156,15 @@ public class Parser {
                     }
                 } else {
                     ui.log("OOPS!!! The task index cannot be empty.");
+                }
+                break;
+            case FIND:
+                params = input.split(" ");
+                if (params.length > 1) {
+                    String result = taskList.filter(params[1]);
+                    ui.log("Here are the matching tasks in your list:\n" + result);
+                } else {
+                    ui.log("OOPS!!! Your search query cannot be empty.");
                 }
                 break;
             }

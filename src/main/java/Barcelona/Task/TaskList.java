@@ -1,6 +1,7 @@
 package Barcelona.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -22,11 +23,7 @@ public class TaskList {
      * @return String to be displayed to user in console
      */
     public String list() {
-        StringBuilder list = new StringBuilder();
-        for (int j = 1; j <= taskList.size(); j++) {
-            list.append(j).append(". ").append(taskList.get(j - 1)).append("\n");
-        }
-        return list.toString();
+        return listAsString(this.taskList);
     }
 
     /**
@@ -67,5 +64,18 @@ public class TaskList {
     public int remove(Task toRemove) {
         this.taskList.remove(toRemove);
         return this.taskList.size();
+    }
+
+    public String filter(String keyword) {
+        return listAsString(this.taskList.stream()
+                .filter((Task a) -> a.description.contains(keyword)).toList());
+    }
+
+    public String listAsString(List<Task> list) {
+        StringBuilder string = new StringBuilder();
+        for (int j = 1; j <= list.size(); j++) {
+            string.append(j).append(". ").append(list.get(j - 1)).append("\n");
+        }
+        return string.toString();
     }
 }
