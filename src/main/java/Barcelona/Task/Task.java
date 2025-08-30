@@ -25,5 +25,9 @@ public abstract class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Converts each Task object to a storable format to be written to txt file
+     * @return String representation of exported task
+     */
     public abstract String export();
 }

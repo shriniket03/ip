@@ -13,12 +13,14 @@ public class Events extends Task {
         this.end = end;
     }
 
+    @Override
     public String toString() {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy, h:mma");
         return "[E]" + super.toString() + " (from: " + this.start.format(outputFormatter)
                 + " to: " + this.end.format(outputFormatter) + ")";
     }
 
+    @Override
     public String export() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         return "E | " + (this.isDone ? 1 : 0) + " | " + this.description + " | " +

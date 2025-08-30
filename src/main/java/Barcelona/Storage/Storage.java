@@ -23,6 +23,13 @@ public class Storage {
         this.ui = ui;
     }
 
+    /**
+     * Loads contents of txt file into the Tasklist for amendments as user gives input
+     * <p>This method will read the file existing in the filePath of the storage object
+     * and return a TaskList that contains all stored tasks in the txt file</p>
+     * @return Fully populated tasklist after reading input from txt file
+     * @throws FileCorruptedException If txt file is not formatted correctly
+     */
     public ArrayList<Task> load() throws FileCorruptedException {
         ArrayList<Task> taskList = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
@@ -67,6 +74,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Function writes the updated tasklist to the txt file
+     * <p>This function writes the updated contents of the tasklist
+     * to the txt file so that it can be fetched in a future session</p>
+     * @param arr - Tasklist that will be written to the file
+     */
     public void write(ArrayList<Task> arr) {
         // Update txt file
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {

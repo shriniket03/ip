@@ -27,6 +27,15 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Main listener that listens to user input
+     * <p>This listener listens to user input and
+     * handles each input with the relevant action
+     * interfacing with the TaskList object</p>
+     * @param sc - Scanner that scans for user input
+     * @param tasklist - Main tasklist object that is updated on user input
+     * @param storage - Handles storage of tasklist into txt file
+     */
     public void listen(Scanner sc, TaskList tasklist, Storage storage) {
         // default date time format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
