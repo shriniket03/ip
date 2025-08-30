@@ -33,10 +33,10 @@ public class Parser {
      * handles each input with the relevant action
      * interfacing with the TaskList object</p>
      * @param sc - Scanner that scans for user input
-     * @param tasklist - Main tasklist object that is updated on user input
-     * @param storage - Handles storage of tasklist into txt file
+     * @param taskList - Main taskList object that is updated on user input
+     * @param storage - Handles storage of taskList into txt file
      */
-    public void listen(Scanner sc, TaskList tasklist, Storage storage) {
+    public void listen(Scanner sc, TaskList taskList, Storage storage) {
         // default date time format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         outer:
@@ -54,16 +54,16 @@ public class Parser {
                 case BYE:
                     break outer;
                 case LIST:
-                    ui.log(tasklist.list());
+                    ui.log(taskList.list());
                     break;
                 case MARK:
                     params = input.split(" ");
                     if (params.length > 1) {
                         try {
                             int taskId = Integer.parseInt(params[1]);
-                            tasklist.markDone(taskId - 1);
+                            taskList.markDone(taskId - 1);
                             ui.log("Nice! I've marked this task as done: \n"
-                                    + tasklist.getTask(taskId - 1));
+                                    + taskList.getTask(taskId - 1));
                         } catch (NumberFormatException e) {
                             ui.log("OOPS!!! The entered task index is not a number.");
                         } catch (NullPointerException | IndexOutOfBoundsException err) {
@@ -78,9 +78,9 @@ public class Parser {
                     if (params.length > 1) {
                         try {
                             int taskId = Integer.parseInt(params[1]);
-                            tasklist.markUndone(taskId - 1);
+                            taskList.markUndone(taskId - 1);
                             ui.log("OK, I've marked this task as not done yet: \n"
-                                    + tasklist.getTask(taskId - 1));
+                                    + taskList.getTask(taskId - 1));
                         } catch (NumberFormatException e) {
                             ui.log("OOPS!!! The entered task index is not a number.");
                         } catch (NullPointerException | IndexOutOfBoundsException err) {
@@ -94,7 +94,7 @@ public class Parser {
                     params = input.split(" ");
                     if (params.length > 1) {
                         Todos todo = new Todos(params[1]);
-                        int size = tasklist.add(todo);
+                        int size = taskList.add(todo);
                         ui.log("Got it. I've added this task:\n" + todo + "\n" +
                                 "Now you have " + size + " tasks in the list");
                     } else {
@@ -108,7 +108,7 @@ public class Parser {
                         try {
                             LocalDateTime dueDate = LocalDateTime.parse(subParam[1], formatter);
                             Deadlines deadline = new Deadlines(dueDate, subParam[0]);
-                            int size = tasklist.add(deadline);
+                            int size = taskList.add(deadline);
                             ui.log("Got it. I've added this task:\n" + deadline + "\n" +
                                     "Now you have " + size + " tasks in the list\n");
                         } catch (DateTimeParseException e) {
@@ -129,7 +129,7 @@ public class Parser {
                             LocalDateTime end = LocalDateTime.parse(subParam[1], formatter);
 
                             Events event = new Events(description, start, end);
-                            int size = tasklist.add(event);
+                            int size = taskList.add(event);
                             ui.log("Got it. I've added this task:\n" + event + "\n" +
                                     "Now you have " + size + " tasks in the list");
                         } catch (DateTimeParseException e) {
@@ -144,8 +144,8 @@ public class Parser {
                     if (params.length > 1) {
                         try {
                             int taskId = Integer.parseInt(params[1]);
-                            Task toRemove = tasklist.getTask(taskId - 1);
-                            int size = tasklist.remove(toRemove);
+                            Task toRemove = taskList.getTask(taskId - 1);
+                            int size = taskList.remove(toRemove);
                             ui.log("Noted. I've removed this task: " + toRemove
                                     + "\n" + "Now you have " + size + " tasks in the list");
                         } catch (NumberFormatException e) {
@@ -158,7 +158,7 @@ public class Parser {
                     }
                     break;
             }
-            storage.write(tasklist.getList());
+            storage.write(taskList.getList());
         }
     }
 }
