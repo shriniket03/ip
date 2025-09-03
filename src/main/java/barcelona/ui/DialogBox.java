@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,7 +40,8 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
+        dialog.getStyleClass().add("reply-label");
     }
 
     public static DialogBox getUserDialog(String s, Image i) {
