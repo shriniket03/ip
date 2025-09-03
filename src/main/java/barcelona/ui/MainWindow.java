@@ -1,6 +1,9 @@
 package barcelona.ui;
 
+import java.util.Objects;
+
 import barcelona.Barcelona;
+import barcelona.parser.Parser;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -62,5 +66,13 @@ public class MainWindow extends AnchorPane {
             );
         });
         pause.play();
+        if (reply.equals("Bye. Hope to see you again soon!")) {
+            PauseTransition exitTimeout = new PauseTransition(Duration.seconds(1));
+            exitTimeout.setOnFinished(event -> {
+                Stage stage = (Stage) dialogContainer.getScene().getWindow();
+                stage.close();
+            });
+            exitTimeout.play();
+        }
     }
 }
