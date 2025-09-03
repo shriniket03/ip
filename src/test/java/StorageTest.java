@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import Barcelona.Storage.Storage;
-import Barcelona.Ui.Ui;
+import barcelona.storage.Storage;
+import barcelona.ui.Ui;
 
 public class StorageTest {
     @Test

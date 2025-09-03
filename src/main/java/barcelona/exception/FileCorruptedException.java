@@ -1,4 +1,4 @@
-package Barcelona.Exception;
+package barcelona.exception;
 
 public class FileCorruptedException extends Exception {
     /**

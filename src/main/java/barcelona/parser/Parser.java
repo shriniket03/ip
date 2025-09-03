@@ -1,14 +1,21 @@
-package Barcelona.Parser;
+package barcelona.parser;
 
-import Barcelona.Task.*;
-import Barcelona.Task.*;
-import Barcelona.Ui.Ui;
-import Barcelona.Storage.Storage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import barcelona.storage.Storage;
+import barcelona.task.Deadlines;
+import barcelona.task.Events;
+import barcelona.task.Task;
+import barcelona.task.TaskList;
+import barcelona.task.Todos;
+import barcelona.ui.Ui;
+
+/**
+ * Creates a parser & listener for user input
+ */
 public class Parser {
     enum Command {
         BYE,
@@ -22,7 +29,7 @@ public class Parser {
         FIND
     }
 
-    public Ui ui;
+    private Ui ui;
 
     public Parser(Ui ui) {
         this.ui = ui;
@@ -68,7 +75,7 @@ public class Parser {
                     } catch (NumberFormatException e) {
                         ui.log("OOPS!!! The entered task index is not a number.");
                     } catch (NullPointerException | IndexOutOfBoundsException err) {
-                        ui.log("OOPS!!! Barcelona.Exception.Barcelona.Exception.Task.Barcelona.Exception.Barcelona.Exception.Task does not exist");
+                        ui.log("OOPS!!! Task does not exist");
                     }
                 } else {
                     ui.log("OOPS!!! The task index cannot be empty.");
@@ -85,7 +92,8 @@ public class Parser {
                     } catch (NumberFormatException e) {
                         ui.log("OOPS!!! The entered task index is not a number.");
                     } catch (NullPointerException | IndexOutOfBoundsException err) {
-                        ui.log("OOPS!!! Barcelona.Exception.Barcelona.Exception.Task.Barcelona.Exception.Barcelona.Exception.Task does not exist");
+                        ui.log("OOPS!!! Barcelona.Exception.Barcelona.Exception.Task.Barcelona.Exception"
+                                + ".Barcelona.Exception.Task does not exist");
                     }
                 } else {
                     ui.log("OOPS!!! The task index cannot be empty.");
@@ -96,8 +104,8 @@ public class Parser {
                 if (params.length > 1) {
                     Todos todo = new Todos(params[1]);
                     int size = taskList.add(todo);
-                    ui.log("Got it. I've added this task:\n" + todo + "\n" +
-                            "Now you have " + size + " tasks in the list");
+                    ui.log("Got it. I've added this task:\n" + todo + "\n" + "Now you have "
+                            + size + " tasks in the list");
                 } else {
                     ui.log("OOPS!!! The description of a todo cannot be empty.");
                 }
@@ -110,8 +118,8 @@ public class Parser {
                         LocalDateTime dueDate = LocalDateTime.parse(subParam[1], formatter);
                         Deadlines deadline = new Deadlines(dueDate, subParam[0]);
                         int size = taskList.add(deadline);
-                        ui.log("Got it. I've added this task:\n" + deadline + "\n" +
-                                "Now you have " + size + " tasks in the list\n");
+                        ui.log("Got it. I've added this task:\n" + deadline + "\n"
+                               + "Now you have " + size + " tasks in the list\n");
                     } catch (DateTimeParseException e) {
                         ui.log("Invalid date/time provided");
                     }
@@ -131,8 +139,8 @@ public class Parser {
 
                         Events event = new Events(description, start, end);
                         int size = taskList.add(event);
-                        ui.log("Got it. I've added this task:\n" + event + "\n" +
-                                "Now you have " + size + " tasks in the list");
+                        ui.log("Got it. I've added this task:\n" + event + "\n"
+                                + "Now you have " + size + " tasks in the list");
                     } catch (DateTimeParseException e) {
                         System.out.println("Invalid date/time provided");
                     }
@@ -152,7 +160,8 @@ public class Parser {
                     } catch (NumberFormatException e) {
                         ui.log("OOPS!!! The entered task index is not a number.");
                     } catch (NullPointerException | IndexOutOfBoundsException err) {
-                        ui.log("OOPS!!! Barcelona.Exception.Barcelona.Exception.Task.Barcelona.Exception.Barcelona.Exception.Task does not exist");
+                        ui.log("OOPS!!! Barcelona.Exception.Barcelona.Exception.Task.Barcelona.Exception.Barcelona"
+                                + ".Exception.Task does not exist");
                     }
                 } else {
                     ui.log("OOPS!!! The task index cannot be empty.");
@@ -166,6 +175,8 @@ public class Parser {
                 } else {
                     ui.log("OOPS!!! Your search query cannot be empty.");
                 }
+                break;
+            default:
                 break;
             }
             storage.write(taskList.getList());

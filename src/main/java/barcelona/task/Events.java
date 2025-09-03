@@ -1,4 +1,4 @@
-package Barcelona.Task;
+package barcelona.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
