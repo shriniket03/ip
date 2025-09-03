@@ -1,4 +1,4 @@
-package Barcelona.Task;
+package barcelona.task;
 
 public abstract class Task {
     protected String description;

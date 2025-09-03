@@ -1,12 +1,11 @@
-package Barcelona.Storage;
+package barcelona.storage;
 
-import Barcelona.Task.*;
-import Barcelona.Task.Deadlines;
-import Barcelona.Task.Events;
-import Barcelona.Task.Task;
-import Barcelona.Task.Todos;
-import Barcelona.Ui.Ui;
-import Barcelona.Exception.FileCorruptedException;
+import barcelona.task.Deadlines;
+import barcelona.task.Events;
+import barcelona.task.Task;
+import barcelona.task.Todos;
+import barcelona.ui.Ui;
+import barcelona.exception.FileCorruptedException;
 
 import java.io.*;
 import java.time.LocalDateTime;

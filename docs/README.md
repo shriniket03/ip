@@ -1,4 +1,4 @@
-# Barcelona.Barcelona User Guide
+# barcelona.barcelona User Guide
 
 // Update the title above to match the actual product name
 

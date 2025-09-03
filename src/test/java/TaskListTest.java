@@ -1,8 +1,8 @@
-import Barcelona.Storage.Storage;
-import Barcelona.Task.Task;
-import Barcelona.Task.TaskList;
-import Barcelona.Task.Todos;
-import Barcelona.Ui.Ui;
+import barcelona.storage.Storage;
+import barcelona.task.Task;
+import barcelona.task.TaskList;
+import barcelona.task.Todos;
+import barcelona.ui.Ui;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
