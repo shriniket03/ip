@@ -9,7 +9,7 @@ import barcelona.task.TaskList;
 import barcelona.ui.Ui;
 
 /**
- * Main chatbot class
+ * barcelona.main.Main chatbot class
  */
 public class Barcelona {
     private final Storage storage;
@@ -36,13 +36,17 @@ public class Barcelona {
     }
 
     /**
-     * Main method to run the chatbot
+     * barcelona.main.Main method to run the chatbot
      */
     public void run() {
         ui.greet();
         Parser parser = new Parser(ui);
         parser.listen(new Scanner(System.in), this.tasks, storage);
         ui.exit();
+    }
+
+    public String getResponse(String input) {
+        return "Barcelona heard: " + input;
     }
 }
 

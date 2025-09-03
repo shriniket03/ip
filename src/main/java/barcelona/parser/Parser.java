@@ -36,12 +36,12 @@ public class Parser {
     }
 
     /**
-     * Main listener that listens to user input
+     * barcelona.main.Main listener that listens to user input
      * <p>This listener listens to user input and
      * handles each input with the relevant action
      * interfacing with the TaskList object</p>
      * @param sc - Scanner that scans for user input
-     * @param taskList - Main taskList object that is updated on user input
+     * @param taskList - barcelona.main.Main taskList object that is updated on user input
      * @param storage - Handles storage of taskList into txt file
      */
     public void listen(Scanner sc, TaskList taskList, Storage storage) {
