@@ -1,19 +1,19 @@
 package barcelona.ui;
 
 public class Ui {
-    String LINE = "____________________________________________________________";
+    private final String line = "____________________________________________________________";
     public void greet() {
-        System.out.println(LINE + """
+        System.out.println(line + """
                 \nHello! I'm Barcelona
                 What can I do for you?\n"""
-                + LINE);
+                + line);
     }
     public void exit() {
-        System.out.println(LINE + """
+        System.out.println(line + """
                 \nBye. Hope to see you again soon!
-                """ + LINE);
+                """ + line);
     }
     public void log(String message) {
-        System.out.println(LINE + "\n" + message + "\n" + LINE);
+        System.out.println(line + "\n" + message + "\n" + line);
     }
 }

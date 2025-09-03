@@ -15,6 +15,7 @@ public class Barcelona {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+    private final Parser parser;
 
     /**
      * Constructor for chatbot
@@ -23,6 +24,7 @@ public class Barcelona {
     public Barcelona(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath, ui);
+        this.parser = new Parser(ui);
         try {
             tasks = new TaskList(storage.load());
         } catch (FileCorruptedException e) {
@@ -40,13 +42,12 @@ public class Barcelona {
      */
     public void run() {
         ui.greet();
-        Parser parser = new Parser(ui);
         parser.listen(new Scanner(System.in), this.tasks, storage);
         ui.exit();
     }
 
     public String getResponse(String input) {
-        return "Barcelona heard: " + input;
+        return parser.reply(input, this.tasks, storage);
     }
 }
 
