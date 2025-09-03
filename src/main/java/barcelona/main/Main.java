@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * Main function for JavaFX Application
  */
 public class Main extends Application {
-    private Barcelona barcelona = new Barcelona("./data/duke.txt");
+    private final Barcelona barcelona = new Barcelona("./data/duke.txt");
 
     @Override
     public void start(Stage stage) {
@@ -27,7 +27,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setBarcelona(barcelona);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

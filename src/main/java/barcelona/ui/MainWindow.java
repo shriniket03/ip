@@ -3,7 +3,6 @@ package barcelona.ui;
 import java.util.Objects;
 
 import barcelona.Barcelona;
-import barcelona.parser.Parser;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,9 +30,14 @@ public class MainWindow extends AnchorPane {
 
     private Barcelona barcelona;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user-avatar.png"));
-    private Image barcelonaImage = new Image(this.getClass().getResourceAsStream("/images/bot-avatar.png"));
+    private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/user-avatar.png")));
+    private final Image barcelonaImage = new Image(Objects.requireNonNull(this.getClass()
+            .getResourceAsStream("/images/bot-avatar.png")));
 
+    /**
+     * Initialises GUI for chatbot
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

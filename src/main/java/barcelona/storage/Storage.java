@@ -47,11 +47,15 @@ public class Storage {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         File file = new File(filePath);
         if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdir();
+            if (!file.getParentFile().mkdir()) {
+                throw new FileCorruptedException("could not create directory");
+            }
         }
         try {
             if (!file.exists()) {
-                file.createNewFile();
+                if (!file.createNewFile()) {
+                    throw new FileCorruptedException("could not create new file");
+                }
             }
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             int lineNum = 1;

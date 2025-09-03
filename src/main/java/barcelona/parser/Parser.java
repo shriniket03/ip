@@ -17,7 +17,10 @@ import barcelona.ui.Ui;
  * Creates a parser & listener for user input
  */
 public class Parser {
-    public enum Command {
+    /**
+     * Types of allowable commands
+     */
+    private enum Command {
         BYE,
         LIST,
         MARK,
