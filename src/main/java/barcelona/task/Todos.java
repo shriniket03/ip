@@ -1,5 +1,8 @@
 package barcelona.task;
 
+/**
+ * Creates a todos object with only description
+ */
 public class Todos extends Task {
 
     public Todos(String description) {

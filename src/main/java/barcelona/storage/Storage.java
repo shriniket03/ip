@@ -1,22 +1,35 @@
 package barcelona.storage;
 
-import barcelona.task.Deadlines;
-import barcelona.task.Events;
-import barcelona.task.Task;
-import barcelona.task.Todos;
-import barcelona.ui.Ui;
-import barcelona.exception.FileCorruptedException;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-public class Storage {
-    public String filePath;
-    public Ui ui;
+import barcelona.exception.FileCorruptedException;
+import barcelona.task.Deadlines;
+import barcelona.task.Events;
+import barcelona.task.Task;
+import barcelona.task.Todos;
+import barcelona.ui.Ui;
 
+/**
+ * Handles storage of tasklist on system hard disk
+ */
+public class Storage {
+    private final String filePath;
+    private final Ui ui;
+
+    /**
+     * Creates file storage object
+     * @param filePath - path to saved txt file
+     * @param ui - logger to log any errors
+     */
     public Storage(String filePath, Ui ui) {
         this.filePath = filePath;
         this.ui = ui;
@@ -46,7 +59,7 @@ public class Storage {
                 String[] params = line.split(" \\| ");
                 try {
                     Task toAdd;
-                    if (params[0].equals("T") && params.length==3) {
+                    if (params[0].equals("T") && params.length == 3) {
                         toAdd = new Todos(params[2]);
                     } else if (params[0].equals("D") && params.length == 4) {
                         toAdd = new Deadlines(LocalDateTime.parse(params[3], formatter), params[2]);
@@ -81,8 +94,8 @@ public class Storage {
      */
     public void write(ArrayList<Task> arr) {
         // Update txt file
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            for (int i=0; i<arr.size(); i++) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            for (int i = 0; i < arr.size(); i++) {
                 bw.write(arr.get(i).export());
                 if (i != arr.size() - 1) {
                     bw.newLine();

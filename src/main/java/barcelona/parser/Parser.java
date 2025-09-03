@@ -29,7 +29,7 @@ public class Parser {
         FIND
     }
 
-    private Ui ui;
+    private final Ui ui;
 
     public Parser(Ui ui) {
         this.ui = ui;

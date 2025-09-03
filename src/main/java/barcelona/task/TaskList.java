@@ -3,8 +3,11 @@ package barcelona.task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tasklist object to store the arraylist of tasks
+ */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> arr) {
         this.taskList = arr;
@@ -66,11 +69,21 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    /**
+     * Filter tasklist by keyword
+     * @param keyword - search keyword for tasklist
+     * @return filtered list as string
+     */
     public String filter(String keyword) {
         return listAsString(this.taskList.stream()
                 .filter((Task a) -> a.description.contains(keyword)).toList());
     }
 
+    /**
+     * converts tasklist to exportable format
+     * @param list - tasklist object
+     * @return - tasklist as string
+     */
     public String listAsString(List<Task> list) {
         StringBuilder string = new StringBuilder();
         for (int j = 1; j <= list.size(); j++) {

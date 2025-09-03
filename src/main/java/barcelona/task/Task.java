@@ -1,9 +1,16 @@
 package barcelona.task;
 
+/**
+ * Task is a parent class for Todos, Events, Deadlines
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Parent class constructor
+     * @param description - description of task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

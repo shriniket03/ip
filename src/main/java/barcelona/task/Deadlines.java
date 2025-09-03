@@ -3,9 +3,17 @@ package barcelona.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadlines is a type of task with a due date
+ */
 public class Deadlines extends Task {
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
+    /**
+     * Creates deadline object
+     * @param deadline - due date
+     * @param description - description for deadline
+     */
     public Deadlines(LocalDateTime deadline, String description) {
         super(description);
         this.deadline = deadline;
