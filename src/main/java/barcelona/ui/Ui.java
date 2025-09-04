@@ -1,5 +1,8 @@
 package barcelona.ui;
 
+/**
+ * Implementation for non-GUI version of chatbot
+ */
 public class Ui {
     private final String line = "____________________________________________________________";
 
