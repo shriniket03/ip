@@ -1,6 +1,7 @@
 package barcelona.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,11 +57,11 @@ public class TaskList {
 
     /**
      * Adds a task to tasklist
-     * @param task - Task to be added
+     * @param tasks - List of tasks to be added
      * @return Size of new Tasklist
      */
-    public int add(Task task) {
-        this.taskList.add(task);
+    public int add(Task... tasks) {
+        this.taskList.addAll(Arrays.asList(tasks));
         return taskList.size();
     }
 
