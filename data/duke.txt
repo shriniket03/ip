@@ -1,8 +1,7 @@
-T | 1 | join sports club
+T | 0 | join sports club
 D | 1 | hello  | 2/12/2019 1800
 E | 1 | Event 2  | 2/12/2019 1800 | 2/12/2019 1200
 E | 1 | Event 3  | 2/12/2019 1800 | 2/12/2019 1200
-E | 0 | Event 4  | 2/12/2019 1800 | 2/12/2019 2000
 T | 0 | sjdjajaj
 T | 0 | sjsjs
 T | 0 | sksks
@@ -11,3 +10,5 @@ T | 0 | jdjdj
 T | 0 | hello
 T | 0 | jf
 D | 0 | lolll  | 2/12/2019 1400
+T | 0 | 123
+T | 0 | 456

@@ -9,7 +9,7 @@ import barcelona.task.TaskList;
 import barcelona.ui.Ui;
 
 /**
- * barcelona.main.Main chatbot class
+ * Main chatbot instance class
  */
 public class Barcelona {
     private final Storage storage;
@@ -38,7 +38,7 @@ public class Barcelona {
     }
 
     /**
-     * barcelona.main.Main method to run the chatbot
+     * Main chatbot run method - for console version
      */
     public void run() {
         ui.greet();
