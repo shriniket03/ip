@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Tasklist object to store the arraylist of tasks
+ * Represents a collection of {@link Task} objects.
+ * <p>
+ * The {@code TaskList} class provides a wrapper around an
+ * {@link ArrayList} of tasks, offering convenient methods for
+ * adding, removing, retrieving, and managing tasks.
+ * </p>
  */
 public class TaskList {
     private final ArrayList<Task> taskList;
