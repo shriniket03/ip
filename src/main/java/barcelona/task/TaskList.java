@@ -14,8 +14,8 @@ import java.util.List;
 public class TaskList {
     private final ArrayList<Task> taskList;
 
-    public TaskList(ArrayList<Task> arr) {
-        this.taskList = arr;
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 
     public TaskList() {
