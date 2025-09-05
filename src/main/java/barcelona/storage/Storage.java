@@ -94,14 +94,14 @@ public class Storage {
      * Function writes the updated tasklist to the txt file
      * <p>This function writes the updated contents of the tasklist
      * to the txt file so that it can be fetched in a future session</p>
-     * @param arr - Tasklist that will be written to the file
+     * @param tasklist - Tasklist that will be written to the file
      */
-    public void write(ArrayList<Task> arr) {
+    public void write(ArrayList<Task> tasklist) {
         // Update txt file
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            for (int i = 0; i < arr.size(); i++) {
-                bw.write(arr.get(i).export());
-                if (i != arr.size() - 1) {
+            for (int i = 0; i < tasklist.size(); i++) {
+                bw.write(tasklist.get(i).export());
+                if (i != tasklist.size() - 1) {
                     bw.newLine();
                 }
             }
