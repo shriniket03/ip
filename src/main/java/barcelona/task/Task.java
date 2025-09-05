@@ -1,7 +1,12 @@
 package barcelona.task;
 
 /**
- * Task is a parent class for Todos, Events, Deadlines
+ * Represents a general task with a description.
+ * <p>
+ * The {@code Task} class is an abstract representation of something
+ * that needs to be done. It stores a textual description of the task
+ * and can be extended by more specific task types (e.g., {@link Todos}).
+ * </p>
  */
 public abstract class Task {
     protected String description;
