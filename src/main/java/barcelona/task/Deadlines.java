@@ -4,7 +4,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Deadlines is a type of task with a due date
+ * Represents a task with a specific deadline.
+ * <p>
+ * The {@code Deadline} class extends {@link Task} by adding a due date
+ * to the task's description. This allows tasks to be tracked not only
+ * by their description, but also by when they must be completed.
+ * </p>
  */
 public class Deadlines extends Task {
     private final LocalDateTime deadline;
