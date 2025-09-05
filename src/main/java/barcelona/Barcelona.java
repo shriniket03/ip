@@ -46,6 +46,11 @@ public class Barcelona {
         ui.exit();
     }
 
+    /**
+     * Generate chatbot response - for GUI version
+     * @param input - User Input as String
+     * @return Chatbot response - to be displayed in GUI
+     */
     public String getResponse(String input) {
         return parser.reply(input, this.tasks, storage);
     }
