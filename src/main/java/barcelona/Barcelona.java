@@ -9,7 +9,37 @@ import barcelona.task.TaskList;
 import barcelona.ui.Ui;
 
 /**
- * Main chatbot instance class
+ * A simple chatbot application for managing tasks.
+ * <p>
+ * The {@code Barcelona} provides an interactive command-line interface
+ * where users can add, manage, and search for tasks. Tasks are stored
+ * in a {@link TaskList}, and can be of type {@link barcelona.task.Todos},
+ * {@link barcelona.task.Deadlines}, or {@link barcelona.task.Events}.
+ * </p>
+ *
+ * <h2>Main Features</h2>
+ * <ul>
+ *   <li>Maintain a list of tasks in memory.</li>
+ *   <li>Support for multiple task types: Todo, Deadline & Event
+ *   <li>Mark tasks as done or undone.</li>
+ *   <li>Delete tasks when no longer needed.</li>
+ *   <li>Search tasks by keyword.</li>
+ *   <li>View all current tasks in the list.</li>
+ * </ul>
+ *
+ * <h2>Supported Commands</h2>
+ * <ul>
+ *   <li><b>BYE</b> – Exit the application.</li>
+ *   <li><b>LIST</b> – List all tasks in the {@link TaskList}.</li>
+ *   <li><b>MARK &lt;index&gt;</b> – Mark the task at the given index as done.</li>
+ *   <li><b>UNMARK &lt;index&gt;</b> – Unmark (undo) the task at the given index.</li>
+ *   <li><b>TODO &lt;description&gt;</b> – Create a {@link barcelona.task.Todos} task.</li>
+ *   <li><b>DEADLINE &lt;description&gt; /by &lt;due date&gt;</b> – Create a {@link barcelona.task.Deadlines} task.</li>
+ *   <li><b>EVENT &lt;description&gt; /from &lt;start date&gt; /to &lt;end date&gt;</b> –
+ *   Create an {@link barcelona.task.Events} task.</li>
+ *   <li><b>DELETE &lt;index&gt;</b> – Delete the task at the given index.</li>
+ *   <li><b>FIND &lt;keyword&gt;</b> – Search for tasks containing the given keyword in their description.</li>
+ * </ul>
  */
 public class Barcelona {
     private final Storage storage;
