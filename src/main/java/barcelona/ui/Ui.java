@@ -4,25 +4,25 @@ package barcelona.ui;
  * Implementation for non-GUI version of chatbot
  */
 public class Ui {
-    private final String line = "____________________________________________________________";
+    private static final String LINE = "____________________________________________________________";
 
     /**
      * To greet user in the non-GUI format
      */
     public void greet() {
-        System.out.println(line + """
+        System.out.println(LINE + """
                 \nHello! I'm Barcelona
                 What can I do for you?\n"""
-                + line);
+                + LINE);
     }
 
     /**
      * To exit application in the non-GUI format
      */
     public void exit() {
-        System.out.println(line + """
+        System.out.println(LINE + """
                 \nBye. Hope to see you again soon!
-                """ + line);
+                """ + LINE);
     }
 
     /**
@@ -30,6 +30,6 @@ public class Ui {
      * @param message - message to be logged
      */
     public void log(String message) {
-        System.out.println(line + "\n" + message + "\n" + line);
+        System.out.println(LINE + "\n" + message + "\n" + LINE);
     }
 }
