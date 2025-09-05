@@ -4,7 +4,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Events is a type of task that has a from date/time to end date/time
+ * Represents an event with a start and end date.
+ * <p>
+ * The {@code Event} class extends {@link Task} by associating the task
+ * description with a specific time frame (start and end date).
+ * This makes it suitable for tasks that occur over a period of time,
+ * such as meetings, workshops, or trips.
+ * </p>
  */
 public class Events extends Task {
     private final LocalDateTime start;
