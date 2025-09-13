@@ -18,6 +18,12 @@
     -fx-background-radius: 50%;
 }
 
+.change-directory-button {
+    -fx-background-color: grey;
+    -fx-font: italic bold 16px "Arial";
+    -fx-background-radius: 0%;
+}
+
 .button:hover {
     -fx-background-color: #5ff55f;
     -fx-font-size: 18px;

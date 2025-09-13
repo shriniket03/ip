@@ -3,14 +3,63 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="barcelona.ui.MainWindow">
+<AnchorPane prefHeight="600.0" prefWidth="400.0"
+            stylesheets="@../css/main.css"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="barcelona.ui.MainWindow">
+
     <children>
-        <TextField fx:id="userInput" layoutX="2.0" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="354.0" styleClass="text-field" stylesheets="@../css/main.css" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="45.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="41.0" stylesheets="@../css/main.css" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="0.0" />
-        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" stylesheets="@../css/main.css" vvalue="1.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+        <!-- Top bar with directory button -->
+        <AnchorPane prefHeight="53.0"
+                    AnchorPane.topAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0">
+            <children>
+                <Button fx:id="dirButton"
+                        layoutX="14.0" layoutY="10.0"
+                        prefHeight="33.0" prefWidth="33.0"
+                        mnemonicParsing="false"
+                        onAction="#handleChangeDirectory"
+                        styleClass="change-directory-button"
+                        stylesheets="@../css/main.css"/>
+            </children>
+        </AnchorPane>
+
+        <!-- Scrollable content area fills all available space -->
+        <ScrollPane fx:id="scrollPane"
+                    fitToHeight="true" fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    vbarPolicy="AS_NEEDED"
+                    AnchorPane.topAnchor="53.0"
+                    AnchorPane.bottomAnchor="43.0"
+                    AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" styleClass="root" stylesheets="@../css/main.css" />
+                <VBox fx:id="dialogContainer"
+                      styleClass="root"
+                      stylesheets="@../css/main.css"/>
             </content>
         </ScrollPane>
+
+        <!-- Bottom text field -->
+        <TextField fx:id="userInput"
+                   onAction="#handleUserInput"
+                   prefHeight="41.0"
+                   styleClass="text-field"
+                   stylesheets="@../css/main.css"
+                   AnchorPane.bottomAnchor="2.0"
+                   AnchorPane.leftAnchor="1.0"
+                   AnchorPane.rightAnchor="45.0"/>
+
+        <!-- Bottom send button -->
+        <Button fx:id="sendButton"
+                mnemonicParsing="false"
+                onAction="#handleUserInput"
+                prefHeight="41.0" prefWidth="41.0"
+                stylesheets="@../css/main.css"
+                AnchorPane.bottomAnchor="1.0"
+                AnchorPane.rightAnchor="0.0"/>
     </children>
 </AnchorPane>

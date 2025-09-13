@@ -1,5 +1,6 @@
 package barcelona.ui;
 
+import java.io.File;
 import java.util.Objects;
 
 import barcelona.Barcelona;
@@ -12,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -27,6 +29,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Button dirButton;
 
     private Barcelona barcelona;
 
@@ -45,6 +49,10 @@ public class MainWindow extends AnchorPane {
         iconView.setFitHeight(20);
         iconView.setFitWidth(20);
         sendButton.setGraphic(iconView);
+        ImageView dirIconView = new ImageView(new Image("/images/dir-icon.png"));
+        dirIconView.setFitHeight(30);
+        dirIconView.setFitWidth(30);
+        dirButton.setGraphic(dirIconView);
     }
 
     /** Injects the Duke instance */
@@ -81,5 +89,28 @@ public class MainWindow extends AnchorPane {
             });
             exitTimeout.play();
         }
+    }
+
+    /**
+     * Opens a file chooser to change txt file directory
+     */
+    @FXML
+    private void handleChangeDirectory() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt")
+        );
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            String reply = barcelona.changeDirectory(selectedFile.getPath());
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getBarcelonaDialog(reply, barcelonaImage)
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getBarcelonaDialog("No file selected", barcelonaImage)
+            );
+        }
+        return;
     }
 }

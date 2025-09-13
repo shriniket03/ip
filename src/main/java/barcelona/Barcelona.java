@@ -1,8 +1,11 @@
 package barcelona;
 
+import java.util.ArrayList;
+
 import barcelona.exception.FileCorruptedException;
 import barcelona.parser.Parser;
 import barcelona.storage.Storage;
+import barcelona.task.Task;
 import barcelona.task.TaskList;
 import barcelona.ui.Ui;
 
@@ -40,7 +43,7 @@ import barcelona.ui.Ui;
  * </ul>
  */
 public class Barcelona {
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
     private final Ui ui;
     private final Parser parser;
@@ -58,6 +61,22 @@ public class Barcelona {
         } catch (FileCorruptedException e) {
             ui.log("Error loading file");
             tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Change directory of Barcelona source file
+     */
+    public String changeDirectory(String filepath) {
+        Storage storage = new Storage(filepath, ui);
+        try {
+            ArrayList<Task> newTaskList = storage.load();
+            this.storage = storage;
+            this.tasks = new TaskList(newTaskList);
+            return "Successfully loaded new file. Your tasks: \n"
+                    + tasks.list();
+        } catch (FileCorruptedException e) {
+            return "Error loading file";
         }
     }
 
