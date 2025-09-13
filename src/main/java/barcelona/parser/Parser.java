@@ -163,8 +163,7 @@ public class Parser {
                     } catch (NumberFormatException e) {
                         ui.log("OOPS!!! The entered task index is not a number.");
                     } catch (NullPointerException | IndexOutOfBoundsException err) {
-                        ui.log("OOPS!!! Barcelona.Exception.Barcelona.Exception.Task.Barcelona.Exception.Barcelona"
-                                + ".Exception.Task does not exist");
+                        ui.log("OOPS!!! Task does not exist");
                     }
                 } else {
                     ui.log("OOPS!!! The task index cannot be empty.");
@@ -214,19 +213,19 @@ public class Parser {
             break;
         case MARK:
             params = input.split(" ");
-            if (params.length > 1) {
-                try {
-                    int taskId = Integer.parseInt(params[1]);
-                    taskList.markDone(taskId - 1);
-                    response = "Nice! I've marked this task as done: \n"
-                            + taskList.getTask(taskId - 1);
-                } catch (NumberFormatException e) {
-                    response = "OOPS!!! The entered task index is not a number.";
-                } catch (NullPointerException | IndexOutOfBoundsException err) {
-                    response = "OOPS!!! Task does not exist";
-                }
-            } else {
+            if (params.length <= 1) {
                 response = "OOPS!!! The task index cannot be empty.";
+                break;
+            }
+            try {
+                int taskId = Integer.parseInt(params[1]);
+                taskList.markDone(taskId - 1);
+                response = "Nice! I've marked this task as done: \n"
+                        + taskList.getTask(taskId - 1);
+            } catch (NumberFormatException e) {
+                response = "OOPS!!! The entered task index is not a number.";
+            } catch (NullPointerException | IndexOutOfBoundsException err) {
+                response = "OOPS!!! Task does not exist";
             }
             break;
         case UNMARK:
