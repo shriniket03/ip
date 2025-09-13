@@ -194,6 +194,7 @@ public class Parser {
      * @return - chatbot response
      */
     public String reply(String input, TaskList taskList, Storage storage) {
+        assert !input.isEmpty();
         String response;
         // default date time format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");

@@ -58,6 +58,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        if (userInput.getText().isEmpty()) {
+            return;
+        }
         String reply = barcelona.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userInput.getText(), userImage)
