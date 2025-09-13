@@ -65,7 +65,12 @@ public class Barcelona {
     }
 
     /**
-     * Change directory of Barcelona source file
+     * Change the file directory of the txt file
+     * If invalid, retains original file
+     * If valid, it will update the tasklist & set the write
+     * location to the new file location
+     * @param filepath - Filepath to the new txt file
+     * @return reply to the user
      */
     public String changeDirectory(String filepath) {
         Storage storage = new Storage(filepath, ui);
