@@ -1,7 +1,5 @@
 package barcelona;
 
-import java.util.Scanner;
-
 import barcelona.exception.FileCorruptedException;
 import barcelona.parser.Parser;
 import barcelona.storage.Storage;
@@ -54,26 +52,13 @@ public class Barcelona {
     public Barcelona(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath, ui);
-        this.parser = new Parser(ui);
+        this.parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
         } catch (FileCorruptedException e) {
             ui.log("Error loading file");
             tasks = new TaskList();
         }
-    }
-
-    public static void main(String[] args) {
-        new Barcelona("./data/duke.txt").run();
-    }
-
-    /**
-     * Main chatbot run method - for console version
-     */
-    public void run() {
-        ui.greet();
-        parser.listen(new Scanner(System.in), this.tasks, storage);
-        ui.exit();
     }
 
     /**

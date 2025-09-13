@@ -3,7 +3,6 @@ package barcelona.parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 import barcelona.storage.Storage;
 import barcelona.task.Deadlines;
@@ -11,7 +10,6 @@ import barcelona.task.Events;
 import barcelona.task.Task;
 import barcelona.task.TaskList;
 import barcelona.task.Todos;
-import barcelona.ui.Ui;
 
 /**
  * Creates a parser & listener for user input
@@ -30,12 +28,6 @@ public class Parser {
         EVENT,
         DELETE,
         FIND
-    }
-
-    private final Ui ui;
-
-    public Parser(Ui ui) {
-        this.ui = ui;
     }
 
     /**
