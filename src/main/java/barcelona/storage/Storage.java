@@ -46,16 +46,12 @@ public class Storage {
         ArrayList<Task> taskList = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
         File file = new File(filePath);
-        if (!file.getParentFile().exists()) {
-            if (!file.getParentFile().mkdir()) {
-                throw new FileCorruptedException("could not create directory");
-            }
+        if (!file.getParentFile().exists() && !file.getParentFile().mkdir()) {
+            throw new FileCorruptedException("could not create directory");
         }
         try {
-            if (!file.exists()) {
-                if (!file.createNewFile()) {
-                    throw new FileCorruptedException("could not create new file");
-                }
+            if (!file.exists() && !file.createNewFile()) {
+                throw new FileCorruptedException("could not create new file");
             }
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             int lineNum = 1;
