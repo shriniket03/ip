@@ -165,6 +165,9 @@ public class Parser {
         String[] subParam = params[1].split("/by ");
         try {
             LocalDateTime dueDate = LocalDateTime.parse(subParam[1], formatter);
+            if (dueDate.isBefore(LocalDateTime.now())) {
+                return "Invalid input! Deadline is already past";
+            }
             Deadlines deadline = new Deadlines(dueDate, subParam[0]);
             int size = taskList.add(deadline);
             return "Got it. I've added this task:\n" + deadline + "\nNow you have "
@@ -194,6 +197,12 @@ public class Parser {
         try {
             LocalDateTime start = LocalDateTime.parse(subParam[0], formatter);
             LocalDateTime end = LocalDateTime.parse(subParam[1], formatter);
+            if (end.isBefore(LocalDateTime.now())) {
+                return "Invalid input! Event is already over";
+            }
+            if (start.isAfter(end)) {
+                return "Invalid input! Start date must be before end date";
+            }
             Events event = new Events(description, start, end);
             int size = taskList.add(event);
             return "Got it. I've added this task:\n" + event + "\nNow you have "
