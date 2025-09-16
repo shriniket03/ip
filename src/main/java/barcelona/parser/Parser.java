@@ -170,7 +170,7 @@ public class Parser {
             return "Got it. I've added this task:\n" + deadline + "\nNow you have "
                     + size + " tasks in the list\n";
         } catch (DateTimeParseException e) {
-            return "Invalid date/time provided";
+            return "Invalid date/time provided: Please provide in the format dd/mm/yyyy HHmm";
         }
     }
 
@@ -199,7 +199,7 @@ public class Parser {
             return "Got it. I've added this task:\n" + event + "\nNow you have "
                     + size + " tasks in the list";
         } catch (DateTimeParseException e) {
-            return "Invalid date/time provided";
+            return "Invalid date/time provided: Please provide in the format dd/mm/yyyy HHmm";
         }
     }
 
