@@ -27,9 +27,26 @@ public class Parser {
         DEADLINE,
         EVENT,
         DELETE,
-        FIND
+        FIND,
+        HELP
     }
 
+    public static final String HELP_COMMANDS = """
+            User Commands:
+
+            - list: show all tasks
+            - todo <todo description>: add a to-do
+
+            - deadline <description> /by <date-time>: add a deadline
+
+            - event <description> /from <date-time> /to <date-time>: schedule an event
+
+            <date-time> format is in DD/MM/YY HHmm
+
+            - mark/unmark <task index>: track your progress
+            - delete <task index>: remove a task
+            - find <search keyword>: search tasks
+            - bye: say goodbye""";
     /**
      * Returns the chatbot's reply based on the user input.
      *
@@ -74,6 +91,9 @@ public class Parser {
             break;
         case FIND:
             response = handleFind(input, taskList);
+            break;
+        case HELP:
+            response = HELP_COMMANDS;
             break;
         default:
             response = "OOPS!!! I'm sorry, but I don't know what that means :-(";
