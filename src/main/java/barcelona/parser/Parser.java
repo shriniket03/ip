@@ -12,11 +12,11 @@ import barcelona.task.TaskList;
 import barcelona.task.Todos;
 
 /**
- * Creates a parser & listener for user input
+ * Parses and processes user input commands for the chatbot.
  */
 public class Parser {
     /**
-     * Types of allowable commands
+     * Supported command types.
      */
     private enum Command {
         BYE,
@@ -31,11 +31,12 @@ public class Parser {
     }
 
     /**
-     * Gives chatbot reply to user input
-     * @param input - user input as String
-     * @param taskList - stored tasklist
-     * @param storage - storage instance to fetch txt file
-     * @return - chatbot response
+     * Returns the chatbot's reply based on the user input.
+     *
+     * @param input the user input string
+     * @param taskList the current list of tasks
+     * @param storage the storage instance used to persist tasks
+     * @return the chatbot's response message
      */
     public String reply(String input, TaskList taskList, Storage storage) {
         assert !input.isEmpty();
@@ -46,7 +47,6 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
-        String[] params;
         switch (action) {
         case BYE:
             response = "Bye. Hope to see you again soon!";
@@ -54,34 +54,27 @@ public class Parser {
         case LIST:
             response = taskList.list();
             break;
-        case MARK: {
+        case MARK:
             response = handleMark(input, taskList);
             break;
-        }
-        case UNMARK: {
+        case UNMARK:
             response = handleUnmark(input, taskList);
             break;
-        }
-        case TODO: {
+        case TODO:
             response = handleCreateTodo(input, taskList);
             break;
-        }
-        case DEADLINE: {
+        case DEADLINE:
             response = handleCreateDeadline(input, taskList);
             break;
-        }
-        case EVENT: {
+        case EVENT:
             response = handleCreateEvent(input, taskList);
             break;
-        }
-        case DELETE: {
+        case DELETE:
             response = handleDelete(input, taskList);
             break;
-        }
-        case FIND: {
+        case FIND:
             response = handleFind(input, taskList);
             break;
-        }
         default:
             response = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             break;
@@ -91,124 +84,109 @@ public class Parser {
     }
 
     /**
-     * Logic for handling mark action
-     * @param input - input string
-     * @param taskList - TaskList object to manage tasks
-     * @return reply to user in GUI
+     * Handles marking a task as completed.
+     *
+     * @param input the user input
+     * @param taskList the task list to modify
+     * @return the chatbot response message
      */
     private String handleMark(String input, TaskList taskList) {
         String[] params = input.split(" ");
-        String response;
-        boolean isValidParam = params.length > 1;
-        if (!isValidParam) {
-            response = "OOPS!!! The task index cannot be empty.";
-            return response;
+        if (params.length <= 1) {
+            return "OOPS!!! The task index cannot be empty.";
         }
         try {
             int taskId = Integer.parseInt(params[1]);
             taskList.markDone(taskId - 1);
-            response = "Nice! I've marked this task as done: \n"
+            return "Nice! I've marked this task as done:\n"
                     + taskList.getTask(taskId - 1);
         } catch (NumberFormatException e) {
-            response = "OOPS!!! The entered task index is not a number.";
+            return "OOPS!!! The entered task index is not a number.";
         } catch (NullPointerException | IndexOutOfBoundsException err) {
-            response = "OOPS!!! Task does not exist";
+            return "OOPS!!! Task does not exist";
         }
-        return response;
     }
 
     /**
-     * Logic to handle unmark action
-     * @param input - input string from user
-     * @param taskList - TaskList object to manage tasks
-     * @return reply to user in GUI
+     * Handles unmarking a task (marking it as not done).
+     *
+     * @param input the user input
+     * @param taskList the task list to modify
+     * @return the chatbot response message
      */
     private String handleUnmark(String input, TaskList taskList) {
         String[] params = input.split(" ");
-        String response;
-        boolean isValidParam = params.length > 1;
-        if (!isValidParam) {
-            response = "OOPS!!! The task index cannot be empty.";
-            return response;
+        if (params.length <= 1) {
+            return "OOPS!!! The task index cannot be empty.";
         }
         try {
             int taskId = Integer.parseInt(params[1]);
             taskList.markUndone(taskId - 1);
-            response = "OK, I've marked this task as not done yet: \n"
+            return "OK, I've marked this task as not done yet:\n"
                     + taskList.getTask(taskId - 1);
         } catch (NumberFormatException e) {
-            response = "OOPS!!! The entered task index is not a number.";
+            return "OOPS!!! The entered task index is not a number.";
         } catch (NullPointerException | IndexOutOfBoundsException err) {
-            response = "OOPS!!! Task does not exist";
+            return "OOPS!!! Task does not exist";
         }
-        return response;
     }
 
     /**
-     * Logic to handle creation of a todo item
-     * @param input - Input String from user
-     * @param taskList - TaskList Object to manage tasks
-     * @return GUI reply to user
+     * Handles creating and adding a new Todo task.
+     *
+     * @param input the user input
+     * @param taskList the task list to modify
+     * @return the chatbot response message
      */
     private String handleCreateTodo(String input, TaskList taskList) {
-        String[] params = input.split(" ");
-        String response;
-        boolean isValidParam = params.length > 1;
-        if (!isValidParam) {
-            response = "OOPS!!! The description of a todo cannot be empty.";
-            return response;
+        String[] params = input.split(" ", 2);
+        if (params.length <= 1) {
+            return "OOPS!!! The description of a todo cannot be empty.";
         }
         Todos todo = new Todos(params[1]);
         int size = taskList.add(todo);
-        response = "Got it. I've added this task:\n" + todo + "\n" + "Now you have "
+        return "Got it. I've added this task:\n" + todo + "\nNow you have "
                 + size + " tasks in the list";
-        return response;
     }
 
     /**
-     * Logic to handle creation of new Deadline
-     * @param input - Input String from User
-     * @param taskList - TaskList Object to manage tasks
-     * @return - GUI reply to user
+     * Handles creating and adding a new Deadline task.
+     *
+     * @param input the user input
+     * @param taskList the task list to modify
+     * @return the chatbot response message
      */
     private String handleCreateDeadline(String input, TaskList taskList) {
         String[] params = input.split(" ", 2);
-        String response;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        boolean isValidParam = params.length > 1 && params[1].contains("/by ");
-        if (!isValidParam) {
-            response = "OOPS!!! The description/due date of a deadline cannot be empty.";
-            return response;
+        if (params.length <= 1 || !params[1].contains("/by ")) {
+            return "OOPS!!! The description/due date of a deadline cannot be empty.";
         }
         String[] subParam = params[1].split("/by ");
         try {
             LocalDateTime dueDate = LocalDateTime.parse(subParam[1], formatter);
             Deadlines deadline = new Deadlines(dueDate, subParam[0]);
             int size = taskList.add(deadline);
-            response = "Got it. I've added this task:\n" + deadline + "\n"
-                    + "Now you have " + size + " tasks in the list\n";
+            return "Got it. I've added this task:\n" + deadline + "\nNow you have "
+                    + size + " tasks in the list\n";
         } catch (DateTimeParseException e) {
-            response = "Invalid date/time provided";
+            return "Invalid date/time provided";
         }
-        return response;
     }
 
     /**
-     * Logic to handle creation of Event
-     * @param input - Input String from User
-     * @param taskList - TaskList Object to manage tasks
-     * @return - GUI reply to user
+     * Handles creating and adding a new Event task.
+     *
+     * @param input the user input
+     * @param taskList the task list to modify
+     * @return the chatbot response message
      */
     private String handleCreateEvent(String input, TaskList taskList) {
         String[] params = input.split(" ", 2);
-        String response;
-        // default date time format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        boolean isValidParam = params.length > 1 && params[1].contains("/from ")
-                && params[1].contains("/to ");
-        if (!isValidParam) {
-            response = "OOPS!!! The description/start date/end date of an event cannot be empty.";
-            return response;
+        if (params.length <= 1 || !params[1].contains("/from ")
+                || !params[1].contains("/to ")) {
+            return "OOPS!!! The description/start date/end date of an event cannot be empty.";
         }
         String[] split = params[1].split("/from ");
         String description = split[0];
@@ -216,61 +194,53 @@ public class Parser {
         try {
             LocalDateTime start = LocalDateTime.parse(subParam[0], formatter);
             LocalDateTime end = LocalDateTime.parse(subParam[1], formatter);
-
             Events event = new Events(description, start, end);
             int size = taskList.add(event);
-            response = "Got it. I've added this task:\n" + event + "\n"
-                    + "Now you have " + size + " tasks in the list";
+            return "Got it. I've added this task:\n" + event + "\nNow you have "
+                    + size + " tasks in the list";
         } catch (DateTimeParseException e) {
-            response = "Invalid date/time provided";
+            return "Invalid date/time provided";
         }
-        return response;
     }
 
     /**
-     * Logic to handle deletion of a task
-     * @param input - Input String from user
-     * @param taskList - TaskList Object to Manage Tasks
-     * @return - GUI Reply to User
+     * Handles deleting a task from the list.
+     *
+     * @param input the user input
+     * @param taskList the task list to modify
+     * @return the chatbot response message
      */
     private String handleDelete(String input, TaskList taskList) {
         String[] params = input.split(" ");
-        String response;
-        boolean isValidParam = params.length > 1;
-        if (!isValidParam) {
-            response = "OOPS!!! The task index cannot be empty.";
-            return response;
+        if (params.length <= 1) {
+            return "OOPS!!! The task index cannot be empty.";
         }
         try {
             int taskId = Integer.parseInt(params[1]);
             Task toRemove = taskList.getTask(taskId - 1);
             int size = taskList.remove(toRemove);
-            response = "Noted. I've removed this task: " + toRemove
-                    + "\n" + "Now you have " + size + " tasks in the list";
+            return "Noted. I've removed this task: " + toRemove
+                    + "\nNow you have " + size + " tasks in the list";
         } catch (NumberFormatException e) {
-            response = "OOPS!!! The entered task index is not a number.";
+            return "OOPS!!! The entered task index is not a number.";
         } catch (NullPointerException | IndexOutOfBoundsException err) {
-            response = "OOPS!!! Task does not exist";
+            return "OOPS!!! Task does not exist";
         }
-        return response;
     }
 
     /**
-     * Logic to handle find task action
-     * @param input - Input String from user
-     * @param taskList - TaskList Object to Manage Tasks
-     * @return - GUI Reply to User
+     * Handles finding tasks that match a search query.
+     *
+     * @param input the user input
+     * @param taskList the task list to search
+     * @return the chatbot response message
      */
     private String handleFind(String input, TaskList taskList) {
         String[] params = input.split(" ");
-        String response;
-        boolean isValidParam = params.length > 1;
-        if (!isValidParam) {
-            response = "OOPS!!! Your search query cannot be empty.";
-            return response;
+        if (params.length <= 1) {
+            return "OOPS!!! Your search query cannot be empty.";
         }
         String result = taskList.filter(params[1]);
-        response = "Here are the matching tasks in your list:\n" + result;
-        return response;
+        return "Here are the matching tasks in your list:\n" + result;
     }
 }
